@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Tic-Tac-Toe game with AI opponent - Developed by Sohan">
+    <meta name="author" content="Sohan">
+    <title>Pro Tic-Tac-Toe | Developed by Sohan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Particles Container -->
+    <div id="particles"></div>
+
+    <div class="container">
+        <header class="header-glass">
+            <div class="logo-section">
+                <h1 class="glowing-title">
+                    <span class="icon-rotate">🎮</span> 
+                    Tic-Tac-Toe 
+                    <span class="pro-badge">PRO</span>
+                </h1>
+                <p class="subtitle">Unbeatable AI • Premium Experience</p>
+            </div>
+            <button id="themeToggle" class="theme-toggle glass-effect" aria-label="Toggle theme">
+                <span class="theme-icon">🌓</span>
+            </button>
+        </header>
+
+        <div class="game-setup glass-card">
+            <div class="mode-selector">
+                <h3 class="section-title">
+                    <span class="title-icon">🎯</span>
+                    Game Mode
+                </h3>
+                <div class="btn-group">
+                    <button class="btn btn-mode active glass-effect" data-mode="pvp">
+                        <span class="btn-icon">👥</span>
+                        <span class="btn-text">Player vs Player</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                    <button class="btn btn-mode glass-effect" data-mode="ai">
+                        <span class="btn-icon">🤖</span>
+                        <span class="btn-text">Player vs AI</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="difficulty-selector" id="difficultySelector" style="display: none;">
+                <h3 class="section-title">
+                    <span class="title-icon">⚡</span>
+                    AI Difficulty
+                </h3>
+                <div class="btn-group difficulty-group">
+                    <button class="btn btn-difficulty glass-effect" data-difficulty="easy">
+                        <span class="btn-icon">😊</span>
+                        <span class="btn-text">Easy</span>
+                        <div class="difficulty-bar">
+                            <div class="difficulty-fill" style="width: 33%"></div>
+                        </div>
+                    </button>
+                    <button class="btn btn-difficulty active glass-effect" data-difficulty="medium">
+                        <span class="btn-icon">😐</span>
+                        <span class="btn-text">Medium</span>
+                        <div class="difficulty-bar">
+                            <div class="difficulty-fill" style="width: 66%"></div>
+                        </div>
+                    </button>
+                    <button class="btn btn-difficulty glass-effect" data-difficulty="hard">
+                        <span class="btn-icon">😈</span>
+                        <span class="btn-text">Hard</span>
+                        <div class="difficulty-bar">
+                            <div class="difficulty-fill" style="width: 100%"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-info glass-card">
+            <div class="current-player">
+                <span class="player-label">Current Turn</span>
+                <div class="player-display">
+                    <span id="currentPlayer" class="player-token animated-token">X</span>
+                </div>
+            </div>
+            <div class="game-status-wrapper">
+                <div class="status-indicator"></div>
+                <div class="game-status" id="gameStatus">Make your move!</div>
+            </div>
+        </div>
+
+        <div class="game-board-container">
+            <div class="game-board glass-card" id="gameBoard">
+                <div class="cell glass-effect" data-index="0" aria-label="Cell 1">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="1" aria-label="Cell 2">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="2" aria-label="Cell 3">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="3" aria-label="Cell 4">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="4" aria-label="Cell 5">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="5" aria-label="Cell 6">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="6" aria-label="Cell 7">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="7" aria-label="Cell 8">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+                <div class="cell glass-effect" data-index="8" aria-label="Cell 9">
+                    <div class="cell-bg"></div>
+                    <span class="cell-content"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn btn-control glass-effect" id="undoBtn" disabled>
+                <span class="btn-icon">↩️</span>
+                <span class="btn-text">Undo</span>
+                <span class="btn-shine"></span>
+            </button>
+            <button class="btn btn-control btn-primary glass-effect" id="playAgainBtn">
+                <span class="btn-icon">🎮</span>
+                <span class="btn-text">Play Again</span>
+                <span class="btn-shine"></span>
+            </button>
+            <button class="btn btn-control glass-effect" id="redoBtn" disabled>
+                <span class="btn-icon">↪️</span>
+                <span class="btn-text">Redo</span>
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+
+        <div class="scoreboard glass-card">
+            <div class="score-item player-x">
+                <div class="score-icon">❌</div>
+                <span class="score-label">Player X</span>
+                <div class="score-value-wrapper">
+                    <span class="score-value" id="scoreX">0</span>
+                    <div class="score-glow"></div>
+                </div>
+            </div>
+            <div class="score-item draw">
+                <div class="score-icon">🤝</div>
+                <span class="score-label">Draws</span>
+                <div class="score-value-wrapper">
+                    <span class="score-value" id="scoreDraw">0</span>
+                    <div class="score-glow"></div>
+                </div>
+            </div>
+            <div class="score-item player-o">
+                <div class="score-icon">⭕</div>
+                <span class="score-label">Player O</span>
+                <div class="score-value-wrapper">
+                    <span class="score-value" id="scoreO">0</span>
+                    <div class="score-glow"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-history glass-card">
+            <h3 class="section-title">
+                <span class="title-icon">📜</span>
+                Game History
+            </h3>
+            <div id="historyList" class="history-list">
+                <p class="no-history">No games played yet</p>
+            </div>
+        </div>
+
+        <footer class="footer glass-card">
+            <div class="developer-badge">
+                <span class="dev-icon">👨‍💻</span>
+                <div class="dev-info">
+                    <p class="dev-text">Developed by <strong class="dev-name">Sohan</strong></p>
+                    <a href="https://github.com/th3r0b0tttt" target="_blank" class="github-link">
+                        <span class="github-icon">⭐</span>
+                        @th3r0b0tttt
+                    </a>
+                </div>
+            </div>
+            <div class="footer-badge">
+                <span class="badge-premium">PREMIUM</span>
+                <span class="badge-year">2025</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Celebration Confetti Container -->
+    <div id="confetti"></div>
+
+    <script src="game.js"></script>
+</body>
+</html>
